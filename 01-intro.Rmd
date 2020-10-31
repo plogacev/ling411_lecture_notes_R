@@ -1,5 +1,281 @@
 # Introduction {#intro}
 
+
+## Introduction to R
+
+- R is a open-source, freely available _statistical programming language_.
+- *R Studio* is the most commonly used interface to R.
+- Originally developed at Bell Labs in the 1980s as the _S programming language_.
+- Modular, most of the functionality is in code libraries called *packages*.. 
+- *Literate programming* and *reproducible research* with knitr and markdown.
+
+## The Basics 
+- You can think of R as a _really_ fancy calculator, with a _great_ way of handling data.
+- The main interaction happens in the *source code window* (by marking code, and pressing Ctrl+R or Apple+R), and on the *R console*.
+
+Addition
+```{r, prompt=TRUE}
+2+1
+```
+
+Subtraction
+```{r, prompt=TRUE}
+2-1
+```
+
+Multiplication
+```{r, prompt=TRUE}
+2*3
+```
+
+Division
+```{r, prompt=TRUE}
+2/3
+```
+
+Exponentiation
+```{r, prompt=TRUE}
+2^3
+```
+
+
+
+## Assignment
+
+Values can be stored in **variables**, which have to be named. You might remember the concept from math; the $x$ in $2 = 0.5*x$ is a variable name. 
+Variables are created implicitly, by being **assigned** a value. This is done using the R **assignment operator**: `<-`.
+
+For example, let's assign 2 to `var_name`:
+```{r, prompt=TRUE}
+var_name <- 2
+```
+
+Now, let's save the **result** of a **complex expression** ...
+
+```{r, prompt=TRUE}
+my_variable <- (11 - 1)^2
+my_other_variable <- 10^2
+```
+
+... and retrieve it later ...
+```{r, prompt=TRUE}
+my_variable
+```
+
+... or combine with other variables
+```{r, prompt=TRUE}
+my_variable + my_other_variable
+```
+
+
+## Evaluation 
+
+- Every **expression** **evaluates to** a value. 
+
+- R displays the value an expression evaluates to for almost every **expression** except assignment.
+
+- The result of the addition is shown:
+
+```{r, prompt=TRUE}
+1+1
+```
+
+- For the assignment, nothing is shown:
+
+```{r, prompt=TRUE}
+x <- 1
+```
+
+
+## Operators 
+
+Variables or expressions can be compared with others.
+- The operator **'=='** tests for equality: 
+
+```{r, prompt=TRUE}
+my_variable == my_other_variable
+```
+
+- The operator **'!='** tests for inequality:
+
+```{r, prompt=TRUE}
+my_variable != my_other_variable
+```
+
+
+- Don't confuse **'=='** with **'='**. The latter performs assignment (just like **'<-'**):
+
+```{r, prompt=TRUE}
+x = 1
+```
+
+
+Variables or expressions can be compared with others.
+- What do you think **'<'**, **'>'**, **'<='**, and **'=>'** test for?
+
+```{r, prompt=TRUE}
+my_other_variable == 100
+```
+
+```{r, prompt=TRUE}
+my_other_variable < 100
+```
+
+```{r, prompt=TRUE}
+my_other_variable <= 100
+```
+
+
+## Using R Help 
+
+- Let's say you forgot the difference between **'='**, **'=='**, and **'<-'**.
+
+```{r, prompt=TRUE, eval=FALSE}
+help("<-")
+```
+
+```{r, prompt=TRUE, eval=F}
+help("=")
+```
+
+```{r, prompt=TRUE, eval=FALSE}
+help("==")
+```
+
+```{r, prompt=TRUE, eval=FALSE}
+help("glm")
+```
+
+
+## Data Types
+
+In R, variables have **types**: 
+
+| Data Type  | Examples|
+| -----------:|:-------------------------------:|
+| Integer (Numeric): | ..., -3, -2, -1, 0, +1, +2, +3, ... |
+| Double (Numeric):  | most rational numbers; e.g., 1.0, 1.5, 20.0, pi|
+| Character:  | `"a"`, `"b"`, `"word"`, `"hello dear friend, ..."`|
+| Logical:  | `TRUE` or `FALSE` (or: `T` or `F` ) |
+| Factor:  | Restricted, user-defined set of values, internally represented numerically (e.g., Gender {'male', 'female', 'other'}) |
+| Ordered factor:  | Factor with an ordering (e.g., Starbucks coffee sizes {'venti' > 'grande' > 'tall'}) |
+
+
+```{r, prompt=TRUE}
+my_apples <- 1
+my_oranges <- "one"
+```
+
+Types matter when comparing: 
+```{r, prompt=TRUE, error=T}
+my_apples == my_oranges
+```
+
+
+Types also matter for other operations.
+
+```{r, prompt=TRUE}
+my_apples <- 1
+my_oranges <- "1.1"
+```
+```{r, prompt=TRUE, error=T}
+my_apples + my_oranges
+```
+
+```{r, prompt=TRUE, error=T}
+my_apples + as.double(my_oranges)
+```
+
+
+## Determining Data Types
+When unsure, we can ask R about the type of a variable:
+
+```{r, prompt=TRUE}
+my_apples <- 1
+my_oranges <- "1.1"
+```
+```{r, prompt=TRUE, error=T}
+typeof(my_apples)
+```
+
+```{r, prompt=TRUE, error=T}
+typeof(my_oranges)
+```
+
+```{r, prompt=TRUE, error=T}
+typeof(as.double(my_oranges))
+```
+
+## Packages
+Most of R's functionality is located in packages contributed by users. In this course, we will use the plotting functionality of `ggplot2`.
+
+```{r, prompt=TRUE, eval=FALSE}
+# install ggplot2
+install.packages("ggplot2")
+# install other packages we will use in this course
+install.packages(c("tidyverse", "magrittr", "brms"))
+
+# load ggplot2
+library(ggplot2)
+```
+
+
+## Plotting
+
+...
+
+## Example: Putting it all (and some more) together
+
+Let's try to understand the Starbucks pricing system.
+
+Here is how we get our data into R.
+
+```{r, prompt=TRUE, error=T}
+
+# store size labels in a vector
+label <- c('tall', 'grande', 'venti')
+# make it an ordered vector
+label <- ordered(label, c('tall', 'grande', 'venti'))
+
+# store sizes in ounces in a vector
+size_oz <- c(12, 16, 20)
+
+# store cafe latte prices in a vector; prices probably not up to date
+price_tl <- c(8.50, 9.75, 11.00) 
+
+df_starbucks_coffee <- data.frame(label, size_oz, price_tl)
+df_starbucks_coffee
+```
+
+
+
+```{r, prompt=TRUE, error=T}
+
+library(ggplot2)
+
+# plot cup size by size category, use a bar plot;
+ggplot(df_starbucks_coffee, aes(label, size_oz)) + geom_bar(stat = "identity")
+
+```
+
+```{r, prompt=TRUE, error=T}
+
+# plot cup size by price, use a scatterplot;  draw a line through the points
+ggplot(df_starbucks_coffee, aes(price_tl, size_oz)) + geom_point()  + geom_smooth(method = "lm")
+
+```
+
+```{r, prompt=TRUE, error=T}
+
+# plot cup size by price, use a scatterplot;  draw a line through the points
+ggplot(df_starbucks_coffee, aes(price_tl, size_oz)) + geom_point()  + geom_smooth(method = "lm", fullrange=TRUE) + scale_x_continuous(limits = c(5, 15))  + scale_y_continuous(limits = c(0, 25))
+
+```
+
+Does this plot even make sense? Why not?
+
+
+<!--
 You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
 
 Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
@@ -19,3 +295,4 @@ knitr::kable(
 ```
 
 You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].
+-->
