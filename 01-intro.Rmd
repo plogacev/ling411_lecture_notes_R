@@ -213,16 +213,59 @@ Most of R's functionality is located in packages contributed by users. In this c
 # install ggplot2
 install.packages("ggplot2")
 # install other packages we will use in this course
-install.packages(c("tidyverse", "magrittr", "brms"))
+install.packages(c("tidyverse", "magrittr", "Hmisc")) 
 
 # load ggplot2
 library(ggplot2)
 ```
 
+Some important functions in R are located in packages. For example, the function `recode` substitutes values by others.
+Let's take a look at the function `recode` in the package `dplyr` (`dplyr::recode`, in R lingo). 
+
+```{r, prompt=T}
+# Let's define a vector with my favorite fruits
+my_favorite_fruit <- c("apples", "pears", "ornges", "mangoes")
+
+# Oh no, I made a typo - it should be 'oranges', not 'ornges'
+# Let's replace it, using the function dplyr::recode
+dplyr::recode(my_favorite_fruit, 'ornges'='oranges') 
+```
+
+```{r, prompt=T}
+# As an alternative way of doing the same thing,
+# we can first load the package to gain access 
+# to all of its functions.
+library(dplyr)
+
+# Having done this, we can just call this function and all 
+# the other functions in  directly, without the `dplyr::`
+# prefix.
+recode(my_favorite_fruit, 'ornges'='oranges') 
+
+```
+
+
 
 ## Plotting
 
-...
+One of the great things about R, is that it contains the package `ggplot2`, which produces pretty decent graphics with relatively little effort.
+
+```{r, prompt=TRUE, eval=T}
+# Load the ggplot2 package.
+library(ggplot2)
+
+# create a vector of the numbers from 1 to 10
+x <- 1:10
+# now, create a vector of their squares
+y <- x^2
+
+# Create a scatterplot of x ~ y, and draw the best fit quadratic function line though them
+ggplot(data=NULL, aes(x, y)) + 
+      geom_point() + 
+      geom_smooth(method = "lm", formula = y~x + I(x^2) )
+
+```
+
 
 ## Example: Putting it all (and some more) together
 
@@ -265,15 +308,32 @@ ggplot(df_starbucks_coffee, aes(price_tl, size_oz)) + geom_point()  + geom_smoot
 
 ```
 
+### How much would other coffee sizes cost if Starbucks introduced them?
+
 ```{r, prompt=TRUE, error=T}
 
 # plot cup size by price, use a scatterplot;  draw a line through the points
-ggplot(df_starbucks_coffee, aes(price_tl, size_oz)) + geom_point()  + geom_smooth(method = "lm", fullrange=TRUE) + scale_x_continuous(limits = c(5, 15))  + scale_y_continuous(limits = c(0, 25))
+ggplot(df_starbucks_coffee, aes(price_tl, size_oz)) + geom_point()  + geom_smooth(method = "lm", fullrange=TRUE) + scale_x_continuous(limits = c(3, 15))  + scale_y_continuous(limits = c(-3, 25))
 
 ```
 
-Does this plot even make sense? Why not?
+- Does this plot even make sense? Why not?
 
+...
+
+- The above plot isn't the most intuitive way to visualize the price-coffee size relationship, because we tend to interpret such plots in terms of 'a change of a certain number of units on the x-axis *leads* to a change of a certain number of units on the y-axis'.
+- In the above case, this means that *'if I choose to pay approximately 5 lira, I'll get 0 ounces of coffee'*, or *'if I choose to pay 4 lira, I'll get -2.5 ounces of coffee'*. This is of course nonsensical. 
+
+### How much would other coffee sizes cost if Starbucks introduced them? A second attempt
+
+- Flipping the coordinates, with coffee size on the x-axis, and price on the y-axis makes it *easier* to see that the only useful part of the plot is where the coffee size is larger than $0$, since you'd never ask yourself the question *'How much would I need to pay, in order to _give_ Starbucks 1 ounce of coffee?'*.
+
+```{r, prompt=TRUE, error=T}
+
+# plot cup size by price, use a scatterplot;  draw a line through the points
+ggplot(df_starbucks_coffee, aes(size_oz, price_tl)) + geom_point()  + geom_smooth(method = "lm", fullrange=TRUE) + scale_x_continuous(limits = c(-1, 25))  + scale_y_continuous(limits = c(0, 15))
+
+```
 
 <!--
 You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).

@@ -1,5 +1,5 @@
 --- 
-title: "Lecture Notes, Data Processing in R"
+title: "Data Processing in R, Lecture Notes"
 author: "Pavel Logacev"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -23,6 +23,7 @@ Markdown basics: https://rmarkdown.rstudio.com/authoring_basics.html
   - The great introduction materials developed at the University of Glasgow: <https://psyteachr.github.io/>, in particular ['Data Skills for Reproducible Science'](https://psyteachr.github.io/msc-data-skills/).
   - Primers on a variety of topics: https://rstudio.cloud/learn/primers
   - Cheat sheets on a variety of topics: https://rstudio.cloud/learn/cheat-sheets
+  
 <!--
 - the O'Reiley book
 - 
