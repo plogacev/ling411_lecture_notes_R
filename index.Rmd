@@ -19,28 +19,31 @@ Markdown basics: https://rmarkdown.rstudio.com/authoring_basics.html
 ## Initial Remarks
 
 - The purpose of these lecture notes is to allow you to quickly revisit concepts covered in class. On their own, they likely won't form a sufficient introduction to R.
-- In the following I will draw on the following resources:
+- In the following, I will draw on the following resources:
   - The great introduction materials developed at the University of Glasgow: <https://psyteachr.github.io/>, in particular ['Data Skills for Reproducible Science'](https://psyteachr.github.io/msc-data-skills/).
   - Primers on a variety of topics: https://rstudio.cloud/learn/primers
   - Cheat sheets on a variety of topics: https://rstudio.cloud/learn/cheat-sheets
   
+  
+
 <!--
 - the O'Reiley book
 - 
 -->
 
 ## Installing and Setting up RStudio
-Currently, the most convenient interface to R is the RStudio GUI. You can either install it locally, or use it online on RSudio Cloud. [RStudio Cloud]().
+Currently, the most convenient interface to R is the RStudio GUI. You can either install it locally, or use it online on [RStudio Cloud](https://rstudio.cloud/).
 
 ### Local RStudio installation
 - Typically, *RStudio* is run on a local computer. 
 
 Please download R and RStudio separately from:
-  - https://cran.r-project.org/
-  - https://rstudio.com/products/rstudio/download/ (download 'RStudio Desktop')
+
+  - R: https://cran.r-project.org/
+  - R studio: https://rstudio.com/products/rstudio/download/ (download 'RStudio Desktop')
   
 ### RStudio Cloud
-You can use the RStudio cloud service for free after getting an account to https://rstudio.cloud.
+You can use the RStudio cloud service for free after getting an account on [RStudio Cloud](https://rstudio.cloud/).
 
 <!--
 ## RStudio Interface 
@@ -52,6 +55,7 @@ You can use the RStudio cloud service for free after getting an account to https
 Please take a look at the following [thorough introduction to the RStudio environment](https://github.com/hbctraining/Intro-to-R/blob/master/lessons/01_introR-R-and-RStudio.md).
 
 Please watch the following video by Lisa DeBruine:
+
 - ['RStudio Setup'](https://www.youtube.com/watch?v=CbA6ZVlJE78&list=PLA2iRWVwbpTIweEBHD2dOKjZHK1atRmXt&index=2&ab_channel=LisaDeBruine)
 
 <!--
