@@ -14,6 +14,14 @@ description: "Lecture notes on data processing in R."
 Markdown basics: https://rmarkdown.rstudio.com/authoring_basics.html
 -->
 
+
+```{r include = FALSE}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed, 
+                      prompt = T)
+```
+
 # Getting Started
 
 ## Initial Remarks

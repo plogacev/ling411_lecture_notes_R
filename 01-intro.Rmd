@@ -1,3 +1,11 @@
+
+```{r include = FALSE}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed, 
+                      prompt = T)
+```
+
 # Introduction {#intro}
 
 
@@ -14,27 +22,27 @@
 - The main interaction happens in the *source code window* (by marking code, and pressing Ctrl+R or Apple+R), and on the *R console*.
 
 Addition
-```{r, prompt=TRUE}
+```{r}
 2+1
 ```
 
 Subtraction
-```{r, prompt=TRUE}
+```{r}
 2-1
 ```
 
 Multiplication
-```{r, prompt=TRUE}
+```{r}
 2*3
 ```
 
 Division
-```{r, prompt=TRUE}
+```{r}
 2/3
 ```
 
 Exponentiation
-```{r, prompt=TRUE}
+```{r}
 2^3
 ```
 
@@ -46,24 +54,24 @@ Values can be stored in **variables**, which have to be named. You might remembe
 Variables are created implicitly, by being **assigned** a value. This is done using the R **assignment operator**: `<-`.
 
 For example, let's assign 2 to `var_name`:
-```{r, prompt=TRUE}
+```{r}
 var_name <- 2
 ```
 
 Now, let's save the **result** of a **complex expression** ...
 
-```{r, prompt=TRUE}
+```{r}
 my_variable <- (11 - 1)^2
 my_other_variable <- 10^2
 ```
 
 ... and retrieve it later ...
-```{r, prompt=TRUE}
+```{r}
 my_variable
 ```
 
 ... or combine with other variables.
-```{r, prompt=TRUE}
+```{r}
 my_variable + my_other_variable
 ```
 
@@ -76,13 +84,13 @@ my_variable + my_other_variable
 
 - The result of the addition is shown:
 
-```{r, prompt=TRUE}
+```{r}
 1+1
 ```
 
 - For the assignment, nothing is shown:
 
-```{r, prompt=TRUE}
+```{r}
 x <- 1
 ```
 
@@ -93,20 +101,20 @@ Variables or expressions can be compared with others.
 
 - The operator **`==`** tests for equality: 
 
-```{r, prompt=TRUE}
+```{r}
 my_variable == my_other_variable
 ```
 
 - The operator **`!=`** tests for inequality:
 
-```{r, prompt=TRUE}
+```{r}
 my_variable != my_other_variable
 ```
 
 
 - Don't confuse **`==`** with **`=`**. The latter performs assignment (just like **`<-`**):
 
-```{r, prompt=TRUE}
+```{r}
 x = 1
 ```
 
@@ -114,15 +122,15 @@ x = 1
 Variables or expressions can be compared with others.
 - What do you think **`<`**, **`>`**, **`<=`**, and **`>=`** test for?
 
-```{r, prompt=TRUE}
+```{r}
 my_other_variable == 100
 ```
 
-```{r, prompt=TRUE}
+```{r}
 my_other_variable < 100
 ```
 
-```{r, prompt=TRUE}
+```{r}
 my_other_variable <= 100
 ```
 
@@ -131,26 +139,26 @@ my_other_variable <= 100
 
 - Let's say you forgot the difference between **`=`**, **`==`**, and **`<-`**.
 
-```{r, prompt=TRUE, eval=FALSE}
+```{r, eval=FALSE}
 help("<-")
 ```
 
-```{r, prompt=TRUE, eval=F}
+```{r, eval=F}
 help("=")
 ```
 
-```{r, prompt=TRUE, eval=FALSE}
+```{r, eval=FALSE}
 help("==")
 ```
 
-```{r, prompt=TRUE, eval=FALSE}
+```{r, eval=FALSE}
 help("glm")
 ```
 
 
 ## Data Types
 
-In R, variables have **types**: 
+In R, values have **types**: 
 
 | Data Type  | Examples|
 | -----------:|:-------------------------------:|
@@ -162,28 +170,28 @@ In R, variables have **types**:
 | Ordered factor:  | Factor with an ordering (e.g., Starbucks coffee sizes {'venti' > 'grande' > 'tall'}) |
 
 
-```{r, prompt=TRUE}
+```{r}
 my_apples <- 1
 my_oranges <- "one"
 ```
 
 Types matter when comparing: 
-```{r, prompt=TRUE, error=T}
+```{r, error=T}
 my_apples == my_oranges
 ```
 
 
 Types also matter for other operations.
 
-```{r, prompt=TRUE}
+```{r}
 my_apples <- 1
 my_oranges <- "1.1"
 ```
-```{r, prompt=TRUE, error=T}
+```{r, error=T}
 my_apples + my_oranges
 ```
 
-```{r, prompt=TRUE, error=T}
+```{r, error=T}
 my_apples + as.double(my_oranges)
 ```
 
@@ -191,26 +199,26 @@ my_apples + as.double(my_oranges)
 ## Determining Data Types
 When unsure, we can ask R about the type of a variable:
 
-```{r, prompt=TRUE}
+```{r}
 my_apples <- 1
 my_oranges <- "1.1"
 ```
-```{r, prompt=TRUE, error=T}
+```{r, error=T}
 typeof(my_apples)
 ```
 
-```{r, prompt=TRUE, error=T}
+```{r, error=T}
 typeof(my_oranges)
 ```
 
-```{r, prompt=TRUE, error=T}
+```{r, error=T}
 typeof(as.double(my_oranges))
 ```
 
 ## Packages
 Most of R's functionality is located in packages contributed by users. In this course, we will use the plotting functionality of `ggplot2`. In chunks like the one below, lines that include a single `#` are the comments. You do not have to run them; they are there to inform you while reading this book. 
 
-```{r, prompt=TRUE, eval=FALSE}
+```{r, eval=FALSE}
 # install ggplot2
 install.packages("ggplot2")
 # install other packages we will use in this course
@@ -251,7 +259,7 @@ recode(my_favorite_fruit, 'ornges'='oranges')
 
 One of the great things about R, is that it contains the package `ggplot2`, which produces pretty decent graphics with relatively little effort.
 
-```{r, prompt=TRUE, eval=T}
+```{r, eval=T}
 # Load the ggplot2 package.
 library(ggplot2)
 
@@ -279,7 +287,7 @@ Let's try to understand the Starbucks pricing system.
 
 Here is how we get our data into R.
 
-```{r, prompt=TRUE, error=T}
+```{r, error=T}
 
 # store size labels in a vector
 label <- c('tall', 'grande', 'venti')
@@ -298,7 +306,7 @@ df_starbucks_coffee
 
 
 
-```{r, prompt=TRUE, error=T}
+```{r, error=T}
 
 library(ggplot2)
 
@@ -308,7 +316,7 @@ ggplot(df_starbucks_coffee, aes(label, size_oz)) +
 
 ```
 
-```{r, prompt=TRUE, error=T}
+```{r, error=T}
 
 # plot cup size by price, use a scatterplot;  draw a line through the points
 ggplot(df_starbucks_coffee, aes(price_tl, size_oz)) + 
@@ -319,7 +327,7 @@ ggplot(df_starbucks_coffee, aes(price_tl, size_oz)) +
 
 ### How much would other coffee sizes cost if Starbucks introduced them?
 
-```{r, prompt=TRUE, error=T}
+```{r, error=T}
 
 # plot cup size by price, use a scatterplot;  draw a line through the points
 ggplot(df_starbucks_coffee, aes(price_tl, size_oz)) + 
@@ -341,7 +349,7 @@ ggplot(df_starbucks_coffee, aes(price_tl, size_oz)) +
 
 - Flipping the coordinates, with coffee size on the x-axis, and price on the y-axis makes it *easier* to see that the only useful part of the plot is where the coffee size is larger than $0$, since you'd never ask yourself the question *'How much would I need to pay, in order to _give_ Starbucks 1 ounce of coffee?'*.
 
-```{r, prompt=TRUE, error=T}
+```{r, error=T}
 
 # plot cup size by price, use a scatterplot;  draw a line through the points
 ggplot(df_starbucks_coffee, aes(size_oz, price_tl)) + 

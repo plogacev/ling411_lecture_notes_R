@@ -1,0 +1,11 @@
+
+```{r include = FALSE}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed, 
+                      prompt = T)
+```
+
+# Functions
+
+- The function `seq()` we have encountered before takes three arguments, it's actually `seq(min, max, increment)`.  
