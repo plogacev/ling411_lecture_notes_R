@@ -173,11 +173,11 @@ library(dplyr)
 - `arrange()` sorts the data frame by one or several columns
 - By default, it does so in ascending order.
 ```{r, error=T}
-arrange(dative, LengthOfTheme)
+arrange(dative[1:10,], LengthOfTheme)
 ```
 - The modifier `desc()` switches `arrange()` to an decending order. 
 ```{r, error=T}
-arrange(dative, desc(LengthOfTheme))
+arrange(dative[1:10,], desc(LengthOfTheme))
 ```
 
 - `select()` keeps *only* the pre-specified columns from the data frame 
@@ -189,11 +189,11 @@ select(dative, game, profit)
 - `left_join` merges two data frames by common columns. This is very useful when data comes from two different sources. 
 
 ```{r, error=T}
-df1 <- data.frame(name = c("Peter", "Mary", "Susy"), n_apples = c(2,3,4))
+df1 <- data.frame(name = c("Peter", "Mary", "Susy", "John"), n_apples = c(2,3,4,1))
 df2 <- data.frame(name = c("Peter", "Mary", "Susy"), n_oranges = c(1,20,0))
 df <- dplyr::left_join(df1, df2)
 df$n_fruit <- df$n_apples + df$n_oranges
-df
+
 ```
 
 - `sample_n` shows a few random rows from the data frame
@@ -214,7 +214,7 @@ dativeSimplified[1:2,]
 
 ```{r, error=T}
 # let's group the dativeSimplified data frame 
-dativeSimplified_grouped <- group_by(dativeSimplified, game)
+dativeSimplified_grouped <- group_by(dativeSimplified, Verb)
 ```
 
 - `summarize()` divides a grouped data frame into subsets, with *each* subset corresponding to one value of the grouping variable (or a combination of values for several grouping variables), ...
@@ -233,11 +233,11 @@ summarize(dativeSimplified_grouped,
 # compute the averages of profit
 summarize(dativeSimplified_grouped, 
           prop_NP = mean(is_realization_NP),
-          prop_NP = mean( AnimacyOfRec == "animate" ),
-          prop_animate_theme = mean( AnimacyOfTheme == "animate" ),
+          prop_PP = 1-prop_NP,
+          how_many_NP_realizations = ifelse(prop_NP > 0.5, "a lot", "few")
           )
 ```
-- The last line uses the function `ifelse` 
+- The last line uses the function `ifelse(condition, value1, value2)`, which, for each element of the condition vector returns the corresponding element of the `value1` vector if the condition is true at that element, or an element of `vector2` otherwise.
 
 
 - `mutate()` proceeds similarly to `summarize()` in dividing a grouped dataset into subsets, but instead of computing one or several values for each subset, it creates or modifies a column 
