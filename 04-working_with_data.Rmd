@@ -1,49 +1,23 @@
-
 ```{r include = FALSE}
 # Seed for random number generation
 set.seed(42)
-knitr::opts_chunk$set(cache.extra = knitr::rand_seed, 
-                      prompt = T)
-```
-
-
-```{r result='hide'}
-
-library(ggplot2)
-library(magrittr)
-library(dplyr)
-library(tidyr)
-
-horse_bets_payout_tl <- c(100, -50, 1, 100, -10, -20, 250, -40, -30, 23, -23, 55, 14, 8, 24, -3)
-poker_payout_tl <- c(24, 5, -38.1, 12, 103, 15, 5, 187, 13, -23, -45, 36)
-
-horse_bets_profits_tl <- horse_bets_payout_tl - 1.5
-poker_profits_tl <- poker_payout_tl
-
-# create two vectors with week days
-horse_bets_week_days <- rep(c("Wed", "Fr"), 8)
-poker_week_days <- rep(c("Wed", "Fr"), 6)
-
-df_horse_bets <- 
-  data.frame(wday = horse_bets_week_days, 
-             profit = horse_bets_profits_tl)
-
-df_poker <- 
-  data.frame(wday = poker_week_days, 
-             profit = poker_payout_tl)
-
-# create a data.frame by concatenating both data.frames
-df_gambling <- rbind(df_horse_bets, df_poker)
-
-
-# let's fix that problem
-df_horse_bets$game <- "horse_bets"
-df_poker$game <- "poker"
-df_gambling <- rbind(df_horse_bets, df_poker)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed, class.output="r-output")
+source("./source/r_functions.R")
 ```
 
 
 # Working with data
+
+```{css echo=FALSE, include}
+.r-output {
+  font-weight: bold;
+}
+.function {
+  background-color: lightgrey;
+  padding: 0.5em 0.5em 0.5em 4em;
+  border: 1px solid black;
+}
+```
 
 - Today, let's work with realistic data. In order to access it, we'll need to load the R package `languageR`. It provides a number of interesting data sets related to language. 
 
@@ -226,6 +200,7 @@ summarize(dativeSimplified_grouped,
           prop_NP = mean(is_realization_NP),
           prop_animate_rec = mean( AnimacyOfRec == "animate" ),
           prop_animate_theme = mean( AnimacyOfTheme == "animate" ),
+          N = n()
           )
 ```
 - `summarize()` can use the results of previous computations
@@ -261,14 +236,14 @@ head(dativeSimplified, 2)
 ```{r, error=T}
 dativeSimplified_grouped_by_AnimacyOfRec_and_AnimacyOfTheme <-
       group_by(dativeSimplified, AnimacyOfRec, AnimacyOfTheme)
-df <- mutate(dativeSimplified_grouped_by_AnimacyOfRec_and_AnimacyOfTheme, 
+df <- summarize(dativeSimplified_grouped_by_AnimacyOfRec_and_AnimacyOfTheme, 
                   perc_NP = mean(RealizationOfRec == "NP") )
 df
 ```
 
 - This alternative is also quite bad. To read this code, you need to know which bracket matches which other bracket.
 ```{r, error=T}
-df <- mutate(group_by(dativeSimplified, AnimacyOfRec, AnimacyOfTheme), 
+df <- summarize(group_by(dativeSimplified, AnimacyOfRec, AnimacyOfTheme), 
                   perc_NP = mean(RealizationOfRec == "NP") )
 df
 ```
@@ -347,6 +322,9 @@ x %<>% .[.<5]
 ```{r, error=T}
 # lets add several columns to 'dativeSimplified'
 dativeSimplified %<>% mutate(A=1, B=2, C=3, D=4)
-dativeSimplified
+head(dativeSimplified)
 ```
+## Functions used in this section
+`r function_definition("...", "")`
+<br>
 

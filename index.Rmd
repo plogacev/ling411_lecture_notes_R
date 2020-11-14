@@ -8,6 +8,9 @@ bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
 description: "Lecture notes on data processing in R."
+output:
+  html_document:
+    css: "css/custom_styles.css"
 ---
 
 <!--
@@ -15,14 +18,27 @@ Markdown basics: https://rmarkdown.rstudio.com/authoring_basics.html
 -->
 
 
-```{r include = FALSE}
+```{r include = T}
 # Seed for random number generation
 set.seed(42)
-knitr::opts_chunk$set(cache.extra = knitr::rand_seed, 
-                      prompt = T)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed, class.output="r-output")
+source("./source/r_functions.R")
 ```
 
+
+
 # Getting Started
+
+```{css echo=FALSE}
+.r-output {
+  font-weight: bold;
+}
+.function {
+  background-color: lightgrey;
+  padding: 0.5em 0.5em 0.5em 4em;
+  border: 1px solid black;
+}
+```
 
 ## Initial Remarks
 
@@ -31,7 +47,6 @@ knitr::opts_chunk$set(cache.extra = knitr::rand_seed,
   - The great introduction materials developed at the University of Glasgow: <https://psyteachr.github.io/>, in particular ['Data Skills for Reproducible Science'](https://psyteachr.github.io/msc-data-skills/).
   - Primers on a variety of topics: https://rstudio.cloud/learn/primers
   - Cheat sheets on a variety of topics: https://rstudio.cloud/learn/cheat-sheets
-  
   
 
 <!--
@@ -88,3 +103,20 @@ knitr::write_bib(c(
 ), 'packages.bib')
 ```
 -->
+
+## Special blocks in the following 
+
+- In the following, R code blocks will appear as follows. The first block shows the R code, the second block the second block (with text in bold), the R output. 
+
+
+```{r }
+mtcars[1:5, "mpg"]
+```
+
+- Grey boxes of this type introduce new functions (at least sometimes).  
+
+`r function_definition("mean(x)", "Computes the average of a vector of numbers.", c(x="The vector to average over."))`
+
+
+## Lecture Notes Source Code
+- You can always download the most up-to-date version of these lecture notes from github at this URL: https://github.com/plogacev/ling411_lecture_notes_R

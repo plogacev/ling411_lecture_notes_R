@@ -2,11 +2,24 @@
 ```{r include = FALSE}
 # Seed for random number generation
 set.seed(42)
-knitr::opts_chunk$set(cache.extra = knitr::rand_seed, 
-                      prompt = T)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed, class.output="r-output")
+source("./source/r_functions.R")
 ```
 
+
+
 # Introduction {#intro}
+
+```{css echo=FALSE, include}
+.r-output {
+  font-weight: bold;
+}
+.function {
+  background-color: lightgrey;
+  padding: 0.5em 0.5em 0.5em 4em;
+  border: 1px solid black;
+}
+```
 
 
 ## Introduction to R
@@ -360,24 +373,48 @@ ggplot(df_starbucks_coffee, aes(size_oz, price_tl)) +
 
 ```
 
-<!--
-You can label chapter and section titles using `{#label}` after them, e.g., we can reference Chapter \@ref(intro). If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(methods).
+## Operators and functions in this section
 
-Figures and tables with captions will be placed in `figure` and `table` environments, respectively.
+### Operators
+`r function_definition("x + y", "Addition")`
+<br>
+`r function_definition("x - y", "Subtraction")`
+<br>
+`r function_definition("x * y", "Multiplication")`
+<br>
+`r function_definition("x / y", "Division")`
+<br>
+`r function_definition("x^y", "Exponentiation")`
+<br>
+`r function_definition("x <- y", "Assignment")`
+<br>
+`r function_definition("==", "Test for equality. **Don't confuse with a single =, which is an assignment operator (and also always returns TRUE).**")`
+<br>
+`r function_definition("!=", "Test for inequality")`
+<br>
+`r function_definition("<", "Test, smaller than")`
+<br>
+`r function_definition(">", "Test, greater than")`
+<br>
+`r function_definition("<=", "Test, smaller than or equal to")`
+<br>
+`r function_definition("=>", "Test, greater than or equal to")`
+<br>
 
-```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center'}
-par(mar = c(4, 4, .1, .1))
-plot(pressure, type = 'b', pch = 19)
+### Functions
+
+```{r results='asis', echo=F}  
+cat( function_definition("install.packages(package_name)", 
+                         "Installs one or several package(s). 
+                         The argument `package_name` can either be a character (`install.packages('dplyr')`) like or a character vector (`install.packages(c('dplyr','ggplot2'))`)."))
 ```
-
-Reference a figure by its code chunk label with the `fig:` prefix, e.g., see Figure \@ref(fig:nice-fig). Similarly, you can reference tables generated from `knitr::kable()`, e.g., see Table \@ref(tab:nice-tab).
-
-```{r nice-tab, tidy=FALSE}
-knitr::kable(
-  head(iris, 20), caption = 'Here is a nice table!',
-  booktabs = TRUE
-)
+<br>
+```{r results='asis', echo=F}  
+cat( function_definition("library(package_name)", 
+                         "Loads a package called `package_name`."))
 ```
-
-You can write citations, too. For example, we are using the **bookdown** package [@R-bookdown] in this sample book, which was built on top of R Markdown and **knitr** [@xie2015].
--->
+<br>
+`r function_definition("typeof(x)", "Determines the type of a variable/vector.")`
+<br>
+`r function_definition("as.double(x)", "Converts a variable/vector to type **double**.")`
+<br>

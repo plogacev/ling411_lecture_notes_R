@@ -2,11 +2,21 @@
 ```{r include = FALSE}
 # Seed for random number generation
 set.seed(42)
-knitr::opts_chunk$set(cache.extra = knitr::rand_seed, 
-                      prompt = F)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed, class.output="r-output")
+source("./source/r_functions.R")
 ```
 
 # Data Structures {#introR}
+```{css echo=FALSE, include}
+.r-output {
+  font-weight: bold;
+}
+.function {
+  background-color: lightgrey;
+  padding: 0.5em 0.5em 0.5em 4em;
+  border: 1px solid black;
+}
+```
 
 
 ## Recap: Data Types in R
@@ -377,3 +387,25 @@ ggplot(profits_by_game, aes(game, avg_profit)) + geom_bar(stat = "identity")
 library(ggplot2)
 ggplot(profits_by_game_and_wday, aes(game, avg_profit, fill = wday)) + geom_bar(stat = "identity", position = "dodge")
 ```
+
+## Functions in this section
+`r function_definition("as.double(...)", "")`
+<br>
+`r function_definition("sum(x)", "")`
+<br>
+`r function_definition("length(x)", "")`
+<br>
+`r function_definition("mean(x)", "")`
+<br>
+`r function_definition("rep(x)", "")`
+<br>
+`r function_definition("View(x)", "")`
+<br>
+`r function_definition("rbind(x)", "")`
+<br>
+`r function_definition("View(x)", "")`
+<br>
+`r function_definition("head(x)", "")`
+<br>
+`r function_definition("library(x)", "")`
+<br>
