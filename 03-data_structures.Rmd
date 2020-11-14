@@ -388,24 +388,24 @@ library(ggplot2)
 ggplot(profits_by_game_and_wday, aes(game, avg_profit, fill = wday)) + geom_bar(stat = "identity", position = "dodge")
 ```
 
+<!-- 
+- dollar sign
+-->
+
 ## Functions in this section
-`r function_definition("as.double(...)", "")`
+`r function_definition("data.frame(a = x, b = y, ...)", "Create a data frame from several vectors. The vectors can be different types.", c(x="A vector with $n$ elements.", y="Another vector with $n$ elements.", "..."="More vectors can be provided."))`
 <br>
-`r function_definition("sum(x)", "")`
+`r function_definition("View(x)", "Display a data frame, or another structure.")`
 <br>
-`r function_definition("length(x)", "")`
+`r function_definition("head(df, n=6)", "Show the first $n$ rows in the data frame df.", c(df="Data frame from which to display the first $n$ rows.", n="The number of rows to display. The default value for $n$ is 6."))`
 <br>
-`r function_definition("mean(x)", "")`
+`r function_definition("sum(x)", "Compute the sum of a vector.")`
 <br>
-`r function_definition("rep(x)", "")`
+`r function_definition("length(x)", "Return the length of a vector.")`
 <br>
-`r function_definition("View(x)", "")`
+`r function_definition("mean(x)", "Compute the mean of a vector.")`
 <br>
-`r function_definition("rbind(x)", "")`
+`r function_definition("rep(x, n)", "Repeat the contents of a vector $n$ times", c(x="The vector to be repeated.", n="How many times to repeat the vector x."))`
 <br>
-`r function_definition("View(x)", "")`
-<br>
-`r function_definition("head(x)", "")`
-<br>
-`r function_definition("library(x)", "")`
+`r function_definition("rbind(df1, df2)", "Append df1 to df2 and return the resulting data frame. Both data frames need to have the same number of columns with the same names.", c(df1="First data frame.", df2="Second data frame."))`
 <br>

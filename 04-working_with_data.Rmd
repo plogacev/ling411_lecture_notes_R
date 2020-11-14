@@ -325,6 +325,17 @@ dativeSimplified %<>% mutate(A=1, B=2, C=3, D=4)
 head(dativeSimplified)
 ```
 ## Functions used in this section
+
+### Operators
+`r function_definition("%>%", "Pronounced: '(forward) pipe'.")`
+<br>
+`r function_definition("%>%", "Pronounced: 'assignment pipe'.")`
+<br>
+
+### Functions
+`r function_definition("ifelse(condition, val_if_cond_true, val_if_cond_false)", "")`
+<br>
+
 `r function_definition("...", "")`
 <br>
 
