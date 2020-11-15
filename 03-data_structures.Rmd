@@ -44,7 +44,7 @@ In R, value has a *type*:
 | Vector | 1-dimensional | one type | ![image](img/vector.jpg){width=25%}
 | Matrix | 2-dimensional | one type | ![image](img/matrix.jpg){width=20%}
 | Array  | n-dimensional | one type | ![image](img/array.jpg){width=20%}
-| data.frame | 2-dimensional | mixed types | ![image](img/data_frame.jpg){width=20%}
+| Data frame (or tibble) | 2-dimensional | mixed types | ![image](img/data_frame.jpg){width=20%}
 | List   | 1-dimensional | mixed types | ![image](img/list.jpg){width=50%}
  <font size="1">(Illustrations from Gaurav Tiwari's article on medium [here](https://medium.com/@tiwarigaurav2512/r-data-types-847fffb01d5b).) </font>
 
@@ -407,5 +407,14 @@ ggplot(profits_by_game_and_wday, aes(game, avg_profit, fill = wday)) + geom_bar(
 <br>
 `r function_definition("rep(x, n)", "Repeat the contents of a vector $n$ times", c(x="The vector to be repeated.", n="How many times to repeat the vector x."))`
 <br>
+```{r results='asis', echo=F}  
+function_definition_cat("seq(from, to, by)", 
+                         "Create a sequence of integers from `from` to `to` in steps of `by`.",
+                        c(from="The integer to start from.",
+                          to="The integer to stop after.",
+                          by="Size of steps to take. (If `from` $>$ `to`, `by` needs to be negative.)"))
+```
+<br>
+
 `r function_definition("rbind(df1, df2)", "Append df1 to df2 and return the resulting data frame. Both data frames need to have the same number of columns with the same names.", c(df1="First data frame.", df2="Second data frame."))`
 <br>

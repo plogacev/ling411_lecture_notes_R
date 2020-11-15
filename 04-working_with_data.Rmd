@@ -75,6 +75,9 @@ dativeSimplified[indices_random,]
 - Let's take a look at the percentages of NP realizations of the recipient by animacy of theme.
 
 ```{r, error=T}
+# load the package dplyr to access the group_by/summarize functions
+library(dplyr)
+
 # let's take a look at the key dependent variable 
 unique(dativeSimplified$RealizationOfRec)
 
@@ -95,7 +98,7 @@ dativeSimplified %>%
 dativeSimplified$is_realization_NP <- as.integer( dativeSimplified$RealizationOfRec == "NP" )
 ```
 
-- Take a subset of the data frame where AnimacyOfRec equals "animate" (note the '=='!).
+- Take a subset of the data frame where AnimacyOfRec equals "animate" (note the `==`!).
 ```{r, error=T}
 # take a look at the values that can occur in this columns
 unique(dativeSimplified$AnimacyOfRec)
@@ -310,6 +313,9 @@ df <-  dativeSimplified %>%
 - The `%<>%` operator is a convenient combination of `%>%` and `<-` which you can use to directly modify an object.
 
 ```{r, error=T}
+# load the package magrittr in order to access the assignment pipe operator
+library(magrittr)
+
 # create a vector with numbers from 1 to 10
 x <- 1:10
 # keep only numbers < 5:
@@ -327,15 +333,104 @@ head(dativeSimplified)
 ## Functions used in this section
 
 ### Operators
-`r function_definition("%>%", "Pronounced: '(forward) pipe'.")`
+```{r results='asis', echo=F}  
+function_definition_cat("%>%", "*(Forward) pipe:* Use the expression on the left as a part of the expression on the right.\n
+- Read `x %>% fn` as *'use `x` as the **only** argument of function `fn`'.*
+- Read `x %>% fn(1, 2)` as *'use `x` as the **first** argument of function `fn`'.*
+- Read `x %>% fn(1, ., 2)` as *'use `x` as the **second** argument of function `fn`'.*")
+```
 <br>
-`r function_definition("%>%", "Pronounced: 'assignment pipe'.")`
+```{r results='asis', echo=F}  
+function_definition_cat("%<>%", "*Assignment pipe:* Use the expression on the left as a part of the expression on the right, **and assign the result back to the left part of the expression**.\n
+- `x %<>% ...` is equivalent to `x <- x %>% ...`
+- Read `x %<>% fn` as *'use `x` as the **only** argument of function `fn`, **and assign it the result to x**'.*
+- Read `x %<>% fn(1, 2)` as *'use `x` as the **first** argument of function `fn`,  **and assign it the result to x**'.*
+- Read `x %<>% fn(1, ., 2)` as *'use `x` as the **second** argument of function `fn`, **and assign it the result to x**'.*")
+```
+<br>
+```{r results='asis', echo=F}  
+function_definition_cat("df[selected_rows, indices_columns]", "*Indexing operator:* Accesses specific rows and/or columns of a data frame.", c("selected_rows"="A vector of indices or names.", "selected_columns"="A vector of indices or names."))
+```
+<br>
+```{r results='asis', echo=F}  
+function_definition_cat("::", "*Double colon operator:* Accesses functions and other objects from packages.  Read `x::y` as *'y from package x.'*")
+```
 <br>
 
 ### Functions
-`r function_definition("ifelse(condition, val_if_cond_true, val_if_cond_false)", "")`
+
+```{r results='asis', echo=F}  
+function_definition_cat("help(name)", "Displays the documentation for an object, such as a function or data frame in R.", c(object="Must be a function or data frame currently loaded in R. If the package in which the function or dataset are located is not currently loaded, the name must be specified using the double-colon operator, i.e., as `package::name`. For example, `help('dplyr::summarize')`.") )
+```
+<br>
+```{r results='asis', echo=F}  
+function_definition_cat("ifelse(condition, val_if_cond_true, val_if_cond_false)", 
+"Replaces all occurrences of `TRUE` by `val_if_cond_true`, and all occurrences of `FALSE` by `val_if_cond_false` and returns the resulting vector.\n
+- If `val_if_cond_true` and `val_if_cond_false` are vectors, the elements of condition at every index $i$ are replaces by `val_if_cond_true[i]` and `val_if_cond_false[i]`, respectively.")
+```
+<br>
+```{r results='asis', echo=F}  
+function_definition_cat("unique(object)", 
+"Return only the unique values in an object. That is, return each value that occurs in vector or data frame object exactly once. For vectors, this means *unique values*. For data frames, this means *unique rows*.", c(object="A vector, matrix, or data frame."))
+```
+<br>
+```{r results='asis', echo=F}  
+function_definition_cat("nrow(object)", 
+"Return the number of rows in `object`.", c(object="A data frame or matrix."))
+```
+<br>
+```{r results='asis', echo=F}  
+function_definition_cat("ncol(object)", 
+"Return the number of columns in `object`.", c(object="A data frame or matrix."))
+```
+<br>
+```{r results='asis', echo=F}  
+function_definition_cat("sample(vector, size = length(vector), replace = FALSE)", 
+"Select a number of random elements from `vector`. If `size == length(vector)`, the vector is just returned in randomly permuted order.", 
+c(vector="The vector from which to sample.",
+  size="How many elements to sample. Must be smaller than or equal to the length of `vector`, which is the default.",
+  replace="Logical. Sample with replacement? (i.e., Can the same element be sampled several times?) Defaults to `FALSE`."))
+```
 <br>
 
-`r function_definition("...", "")`
+```{r results='asis', echo=F}  
+function_definition_cat("group_by(df, grouping_var1, ...)", 
+"Records the grouping of a data frame for future application of `summarize()` or `mutate()`.", c(df="A data frame.", grouping_var1="The first grouping variable.", "..."="More grouping variables, if applicable."))
+```
 <br>
 
+```{r results='asis', echo=F}  
+function_definition_cat("summarize(df, expression1, ...)", 
+"Computes a series of summary statistics for each combination of values specified by the levels of the grouping variables, for example compute the average of a column.", c(df="A data frame, typically previously grouped using `group_by`.", expression1="An expression computing a summary statistics.", "..."="An expression computing summary statistics."))
+```
+<br>
+
+```{r results='asis', echo=F}  
+function_definition_cat("mutate(df, expression1, ...)", 
+"Modify and old column, or create a new one for each combination of grouping variable levels.", c(df="A data frame, typically previously grouped using `group_by`.", expression1="An expression creating a new column, or modifying an old one.", "..."="More expressions creating new columns, or modifying an old ones."))
+```
+<br>
+```{r results='asis', echo=F}  
+function_definition_cat("n()", 
+"Within a call to `summarize()` or `mutate()`, `n()` computes the number of rows at each combination of grouping variable levels.")
+```
+<br>
+
+```{r results='asis', echo=F}  
+function_definition_cat("arrange()", "")
+```
+<br>
+```{r results='asis', echo=F}  
+function_definition_cat("select()", "")
+```
+<br>
+```{r results='asis', echo=F}  
+function_definition_cat("sample_n()", "")
+```
+<br>
+
+
+<!-- to-do:
+- Explain what the point of the group_by/mutate combo is.
+- Introduce the $ operator together with data frames
+-->

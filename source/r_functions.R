@@ -16,7 +16,7 @@ function_definition <- function(name, description, arguments=NULL) {
 }
 
 function_definition_cat <- function(name, description, arguments=NULL) {
-  cat(function_definition_cat(name, description, arguments))
+  cat(function_definition(name, description, arguments))
   invisible(NULL)
 }
 
