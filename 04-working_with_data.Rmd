@@ -8,7 +8,9 @@ source("./source/r_functions.R")
 
 # Working with data
 
-```{css echo=FALSE, include}
+(`r format(Sys.time(), '%d %B, %Y, %H:%M')`)
+
+```{css echo=FALSE}
 .r-output {
   font-weight: bold;
 }
@@ -160,7 +162,8 @@ arrange(dative[1:10,], desc(LengthOfTheme))
 - `select()` keeps *only* the pre-specified columns from the data frame 
 ```{r, error=T}
 # 
-select(dative, game, profit)
+df <- select(dative, AnimacyOfTheme, LengthOfTheme, RealizationOfRecipient)
+head(df)
 ```
 
 - `left_join` merges two data frames by common columns. This is very useful when data comes from two different sources. 

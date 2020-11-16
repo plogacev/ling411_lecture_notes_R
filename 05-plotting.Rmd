@@ -1,0 +1,22 @@
+```{r include = FALSE}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed, class.output="r-output")
+source("./source/r_functions.R")
+```
+
+# Plottting with ggplot2
+(`r format(Sys.time(), '%d %B, %Y, %H:%M')`)
+
+```{css echo=FALSE, include}
+.r-output {
+  font-weight: bold;
+}
+.function {
+  background-color: lightgrey;
+  padding: 0.5em 0.5em 0.5em 4em;
+  border: 1px solid black;
+}
+```
+
+

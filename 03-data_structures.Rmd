@@ -7,7 +7,9 @@ source("./source/r_functions.R")
 ```
 
 # Data Structures {#introR}
-```{css echo=FALSE, include}
+(`r format(Sys.time(), '%d %B, %Y, %H:%M')`)
+
+```{css echo=FALSE}
 .r-output {
   font-weight: bold;
 }
