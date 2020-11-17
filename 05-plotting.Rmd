@@ -80,18 +80,23 @@ ggplot(df, aes(a, a_sq)) + geom_point()
 ```{r, error=T}
 ggplot(df, aes(a, a_sq)) + geom_line()
 ```
+
 - We can even combine geoms:
 ```{r, error=T}
 ggplot(df, aes(a, a_sq)) + geom_point() + geom_line()
 ```
+
 - ... in fact, as many as we want. But there is no guarantee that the result will look good, or even make sense.
 ```{r, error=T}
 ggplot(df, aes(a, a_sq)) + geom_point() + geom_line() + geom_bar(stat = "identity")
 ```
+
 - The order of their specification matter a little bit. Here, the line is plotted over the bars, in contrast to the previous plot.
 ```{r, error=T}
 ggplot(df, aes(a, a_sq)) + geom_point() + geom_bar(stat = "identity") + geom_line()
 ```
+
+
 ## Color and fill
 - Relationships between two variables are usually easy to visualize, but often there is a third variable.
 - There are various ways for dealing with it.
@@ -99,11 +104,13 @@ ggplot(df, aes(a, a_sq)) + geom_point() + geom_bar(stat = "identity") + geom_lin
 ```{r, error=T}
 ggplot(df, aes(a, a_sq, color = my_group)) + geom_point(stat = "identity")
 ```
+
 - Let's try this with bar plots. Not at all what you expected, is it? 
 
 ```{r, error=T}
 ggplot(df, aes(a, a_sq, color = my_group)) + geom_bar(stat = "identity")
 ```
+
 - This is what we wanted. The right argument for bar plots is `fill`.
 ```{r, error=T}
 ggplot(df, aes(a, a_sq, fill = my_group)) + geom_bar(stat = "identity")
@@ -118,6 +125,7 @@ ggplot(df, aes(a, a_sq, fill = my_group)) + geom_bar(stat = "identity")
 ```{r, error=T}
 ggplot(df, aes(a, a_sq, color = my_group)) + geom_point(size=10, fill = "black")
 ```
+
 - Bars have both.
 
 ```{r, error=T}
