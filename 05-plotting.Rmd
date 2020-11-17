@@ -5,7 +5,7 @@ knitr::opts_chunk$set(cache.extra = knitr::rand_seed, class.output="r-output", f
 source("./source/r_functions.R")
 ```
 
-# Plotting with ggplot2
+# A first plot
 (`r format(Sys.time(), '%d %B, %Y, %H:%M')`)
 
 ```{css echo=FALSE, include}
