@@ -54,6 +54,17 @@ source("./source/r_functions.R")
 - 
 -->
 
+## Specific useful cheat sheets and primers
+
+- [RStudio IDE](https://github.com/rstudio/cheatsheets/raw/master/rstudio-ide.pdf)
+- [Base R](http://github.com/rstudio/cheatsheets/raw/master/base-r.pdf) ([Turkish](https://github.com/rstudio/cheatsheets/raw/master/translations/turkish/baseR_translate_tr.pdf))
+- [Data transformation](https://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf) ([Turkish](https://github.com/rstudio/cheatsheets/raw/master/translations/turkish/data-transformation_turkish.pdf))
+- [Data visualization](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)
+([Turkish](https://github.com/rstudio/cheatsheets/raw/master/translations/turkish/ggplot2_2.0_Turkish.pdf))
+- [Data import](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf) ([Turkish](https://github.com/rstudio/cheatsheets/raw/master/translations/turkish/data_import_tr.pdf))
+
+
+
 ## Installing and Setting up RStudio
 Currently, the most convenient interface to R is the RStudio GUI. You can either install it locally, or use it online on [RStudio Cloud](https://rstudio.cloud/).
 
