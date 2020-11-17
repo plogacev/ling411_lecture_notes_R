@@ -28,6 +28,7 @@ source("./source/r_functions.R")
 
 
 # Getting Started
+(`r format(Sys.time(), '%d %B, %Y, %H:%M')`)
 
 ```{css echo=FALSE}
 .r-output {
