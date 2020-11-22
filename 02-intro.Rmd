@@ -398,7 +398,7 @@ ggplot(df_starbucks_coffee, aes(size_oz, price_tl)) +
 <br>
 `r function_definition("<=", "Test, smaller than or equal to")`
 <br>
-`r function_definition("=>", "Test, greater than or equal to")`
+`r function_definition(">=", "Test, greater than or equal to")`
 <br>
 
 ### Functions
