@@ -1,6 +1,6 @@
 --- 
 title: "Data Processing in R, Lecture Notes"
-author: "Pavel Logacev"
+author: "Pavel Logacev and Utku Türk"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
