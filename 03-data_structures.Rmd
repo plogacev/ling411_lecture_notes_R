@@ -168,7 +168,7 @@ sum(horse_bets_payout_tl)
 sum(poker_payout_tl)
 ```
 
-- We may also need these length of these vectors:
+- We may also need length values of these vectors:
 
 ```{r, error=T}
 length(horse_bets_payout_tl)
