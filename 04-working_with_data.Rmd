@@ -42,6 +42,7 @@ head(dativeSimplified)
 
 ```{r, eval=F, error=T}
 help("dativeSimplified")
+# or we can use: ?dativeSimplified
 ```
 
 - The dative alternation in English is the alternation between (1) and (2). Both are grammatical and have the same truth conditions.
@@ -90,17 +91,25 @@ dativeSimplified %>%
                    N = n()
                   )
 ```
+
+- What does this result say? 
+- We can translate the first row of the data frame to English as the following: "The percentage of NP realizations when the recipient is animate is 63.4% and there are 822 rows where the recipient is animate." 
+
 ### Now, step by step
+
 - Wow, that was easy. ...
-- But let's break down the computations into their elementary parts and take look at the logic ...
+- But let's break down the computations into their elementary parts and take look at the logic.
 
 - First, we'll need to add a column which we can later use to compute the percentage of NP realizations.
 ```{r, error=T}
 # first, let's create a new column encoding whether RealizationOfRec is 'NP'
+# When the recipient is realized as an NP, this function will put a 1 in our new column, and 0 otherwise.
 dativeSimplified$is_realization_NP <- as.integer( dativeSimplified$RealizationOfRec == "NP" )
 ```
 
 - Take a subset of the data frame where AnimacyOfRec equals "animate" (note the `==`!).
+- For this, we can use `subset()` function. It takes a data frame and a condition for subsetting.
+
 ```{r, error=T}
 # take a look at the values that can occur in this columns
 unique(dativeSimplified$AnimacyOfRec)
@@ -111,6 +120,7 @@ df_inanimate <- subset(dativeSimplified, AnimacyOfRec == "inanimate")
 ```
 
 - Compute the average of the column `is_realization_NP` in each data frame, as well as the number of rows in it.
+- Then, merge them together into a single data frame.
 ```{r, error=T}
 # compute the percentage of NP realizations 
 perc_NP_animate = mean(df_animate$is_realization_NP)
@@ -121,7 +131,9 @@ N_animate = nrow(df_animate)
 # bind to data frame
 (res_animate <- data.frame(AnimacyOfRec = "animate", perc_NP = perc_NP_animate, N=N_animate))
 ```
+
 - Now, do the same for inanimates.
+
 ```{r, error=T}
 perc_NP_inanimate = mean(df_inanimate$is_realization_NP)
 N_inanimate = nrow(df_inanimate)
@@ -143,7 +155,7 @@ res
 
 
 ## Working with dplyr
-- The package *dplyr* ([cheat sheet](http://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)) provides a set of functions for working with data frames
+- The package *dplyr* ([cheat sheet](http://github.com/rstudio/cheatsheets/raw/master/data-transformation.pdf)) provides a set of functions for working with data frames.
 - Some of functions don't perform a noticeable action, while others reshape data frames or create new ones (the latter are called 'verbs')
 ```{r, error=T}
 library(dplyr)
@@ -161,12 +173,24 @@ arrange(dative[1:10,], desc(LengthOfTheme))
 
 - `select()` keeps *only* the pre-specified columns from the data frame 
 ```{r, error=T}
-# 
-df <- select(dative, AnimacyOfTheme, LengthOfTheme, RealizationOfRecipient)
+# Let's assume we do not care about everything within the dative data frame.
+# What is important for us is Modality, AnimacyOfTheme, LengthOfTheme, and RealizationOfRecipient. Let's say we won't use any other columns and don't want all the
+# clutter that comes with those other columns. 
+
+df <- select(dative, Modality, AnimacyOfTheme, LengthOfTheme, RealizationOfRecipient)
 head(df)
 ```
 
-- `left_join` merges two data frames by common columns. This is very useful when data comes from two different sources. 
+- `select()` can also *drop* columns. Let's assume that we changed our mind and do not want to work with the Modality column. 
+- Similar to the indices, minus symbol `-` omits the specified column(s).
+
+```{r, error=T}
+
+df <- select(df, -Modality)
+head(df)
+```
+
+- `left_join()` merges two data frames by common columns. This is very useful when data comes from two different sources. 
 
 ```{r, error=T}
 df1 <- data.frame(name = c("Peter", "Mary", "Susy", "John"), n_apples = c(2,3,4,1))
@@ -176,12 +200,12 @@ df$n_fruit <- df$n_apples + df$n_oranges
 
 ```
 
-- `sample_n` shows a few random rows from the data frame
+- `sample_n()` shows a few random rows from the data frame
 ```{r, error=T}
 sample_n(dativeSimplified, 10)
 ```
 
-- `group_by` and `ungroup` add and remove information about grouping variables  
+- `group_by()` and `ungroup()` add and remove information about grouping variables  
 ```{r, error=T}
 # let's 'group' a small subset of the gambling data frame by game
 group_by(dativeSimplified[1:2,], RealizationOfRec) 
@@ -190,15 +214,18 @@ group_by(dativeSimplified[1:2,], RealizationOfRec)
 dativeSimplified[1:2,]
 ```
 
-- data frames need to be grouped for use with `summarize()` and `mutate()`
+- Data frames need to be grouped for use with `summarize()` and `mutate()`.
 
 ```{r, error=T}
 # let's group the dativeSimplified data frame 
 dativeSimplified_grouped <- group_by(dativeSimplified, Verb)
 ```
 
-- `summarize()` divides a grouped data frame into subsets, with *each* subset corresponding to one value of the grouping variable (or a combination of values for several grouping variables), ...
-- ... and computes one or several values on each such subset
+- `summarize()` is a complex function that does multiple things in a single instance. 
+	1. It divides a grouped data frame into subsets, with *each* subset corresponding to one value of the grouping variable (or a combination of values for several grouping variables). 
+	2. It computes one or several values we specify on each such subset.
+	3. It creates a new data frame and puts everything together. The first column of this new data frame consists of levels of our grouping variable. In the following columns, the `summarize()` function prints the results of the computations we have specified.
+- Try to guess the result of the following code. What will you see as an output? What will be the name of the columns? 
 
 ```{r, error=T}
 # summarize several variables
@@ -209,7 +236,9 @@ summarize(dativeSimplified_grouped,
           N = n()
           )
 ```
-- `summarize()` can use the results of previous computations
+- `summarize()` can use the results of previous computations specified within the same `summarize()` function.
+- In the code below, we first create a column named `prop_NP`. Then, we use it to compute two other values named `prop_PP` and `how_many_NP_realizations`.
+
 ```{r, error=T}
 # compute the averages of profit
 summarize(dativeSimplified_grouped, 
@@ -221,11 +250,13 @@ summarize(dativeSimplified_grouped,
 - The last line uses the function `ifelse(condition, value1, value2)`, which, for each element of the condition vector returns the corresponding element of the `value1` vector if the condition is true at that element, or an element of `vector2` otherwise.
 
 
-- `mutate()` proceeds similarly to `summarize()` in dividing a grouped dataset into subsets, but instead of computing one or several values for each subset, it creates or modifies a column 
+- `mutate()` proceeds similarly to `summarize()` in dividing a grouped dataset into subsets, but instead of computing one or several values for each subset, it creates or modifies a column.
+- The main difference between `mutate()` and `summarize()` is the output. While `mutate()` modifies the original and returns a modified version of it, `summarize()` creates a brand new data frame with one row for every combination of the the grouping variable values. 
+- A very simple application of `mutate()` is to simply create a new column. In this case, we don't even need to group.
 
-- A very simple application is to simply create a new column. In this case, we don't even need to group
 ```{r, error=T}
-# these two lines performs exactly the same action, except the latter stores the result in df 
+# these two lines performs exactly the same action, 
+# except the latter stores the result in df 
 dativeSimplified$is_realization_NP <- (dativeSimplified$RealizationOfRec == "NP" ) 
 df <- mutate(dativeSimplified, is_realization_NP = (RealizationOfRec == "NP") )
 
@@ -272,8 +303,10 @@ sqrt(divide_by(sum(divide_by(2,3), multiply_by(2,3)), sum(3,4)))
 - The problem is that we have too many levels of embedding.
 - In natural language we avoid multiple embeddings of that sort by making shorter sentences, and using anaphors to refer to previous discourse.
 - The packages **dplyr** and **magrittr** provide a limited version of such functionality, and we'll need to use **pipe** operators (`%>%` and `%<>%`) to link expressions with an 'anaphoric dependency'.
-
+- Whenever you see `%>%`, you can think about it as the following: "Take whatever is on the left side, and use it in the function that is on the right side."
 ```{r, error=T}
+library(dplyr)
+library(magrittr)
 # Typical notation. Read as "Divide 10 by 2."
 divide_by(10, 2)
 
