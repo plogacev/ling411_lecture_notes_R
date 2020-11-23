@@ -44,8 +44,10 @@ source("./source/r_functions.R")
 ## Initial Remarks
 
 - The purpose of these lecture notes is to allow you to quickly revisit concepts covered in class. On their own, they likely won't form a sufficient introduction to R.
-- In the following, I will draw on the following resources:
+- In the following, I will draw on the following resources.
   - The great introduction materials developed at the University of Glasgow: <https://psyteachr.github.io/>, in particular ['Data Skills for Reproducible Science'](https://psyteachr.github.io/msc-data-skills/).
+  - The also pretty great introduction to R and statistics by Danielle Navarro available [here](https://learningstatisticswithr.com).
+  - Matt Crump's ['Answering Questions with Data'](https://crumplab.github.io/statistics/).
   - Primers on a variety of topics: https://rstudio.cloud/learn/primers
   - Cheat sheets on a variety of topics: https://rstudio.cloud/learn/cheat-sheets
   
