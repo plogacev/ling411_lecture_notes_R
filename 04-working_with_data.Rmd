@@ -129,7 +129,7 @@ perc_NP_animate = mean(df_animate$is_realization_NP)
 N_animate = nrow(df_animate)
 
 # bind to data frame
-(res_animate <- data.frame(AnimacyOfRec = "animate", perc_NP = perc_NP_animate, N=N_animate))
+(res_animate <- data.frame(AnimacyOfRec = "animate", perc_NP = perc_NP_animate, N=N_inanimate))
 ```
 
 - Now, do the same for inanimates.
